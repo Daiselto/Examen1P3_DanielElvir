@@ -1,6 +1,7 @@
 #include "CPU.h"
 
 CPU::CPU(int Core, int RAM, string TipoDisco, int Alm, int GPU, int Tarea) {
+	double OVERhead=0.0;
 	cores = Core;
 	ram = RAM;
 	tipoDisco=TipoDisco;
@@ -9,27 +10,27 @@ CPU::CPU(int Core, int RAM, string TipoDisco, int Alm, int GPU, int Tarea) {
 	tareas = Tarea;
 	switch (gpu) {
 	
-	case 1:
+	case 3050:
 		valorGpu = 1;
 		break;
 
-	case 2:
+	case 3060:
 		valorGpu = 2;
 		break;
 
-	case 3:
+	case 3070:
 		valorGpu = 3;
 		break;
 
-	case 4:
+	case 3090:
 		valorGpu = 4;
 		break;
 
-	case 5:
+	case 4070:
 		valorGpu = 5;
 		break;
 
-	case 6:
+	case 7090:
 		valorGpu = 6;
 		break;
 	
@@ -38,7 +39,8 @@ CPU::CPU(int Core, int RAM, string TipoDisco, int Alm, int GPU, int Tarea) {
 		break;
 	}
 
-	overhead = (tareas / cores) + (1 / ram);
+	OVERhead = (Tarea / Core) + (1 / RAM);
+	overhead = OVERhead;
 }
 
 CPU::~CPU() {
@@ -75,6 +77,10 @@ int CPU::getAlmacenamiento() {
 	return almacenamiento;
 }
 
+void CPU::setTipoDisco(string TipoDisco) {
+	tipoDisco = TipoDisco;
+}
+
 void CPU::setAlmacenamiento(int alm) {
 	almacenamiento = alm;
 }
@@ -103,10 +109,15 @@ void CPU::setTareas(int Tarea) {
 	tareas = Tarea;
 }
 
-int CPU::getOverhead() {
+double CPU::getOverhead() {
 	return overhead;
 }
 
-void CPU::setOverhead(int OverHead) {
+
+void CPU::setOverhead(double OverHead) {
 	overhead = OverHead;
+}
+
+double CPU::recalcularOverhead(int Tarea, int Core, int RAM) {
+	return overhead = (Tarea / Core) + (1 / RAM);
 }

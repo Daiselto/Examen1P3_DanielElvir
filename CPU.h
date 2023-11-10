@@ -12,7 +12,7 @@ class CPU {
 	int gpu;
 	int valorGpu;
 	int tareas;
-	double overhead;
+	double overhead=0.0;
 public:
 	CPU(int, int, string, int, int, int);
 	CPU();
@@ -22,6 +22,7 @@ public:
 	int getRam();
 	void setRam(int);
 	string getTipoDisco();
+	void setTipoDisco(string);
 	void setCores(string);
 	int getAlmacenamiento();
 	void setAlmacenamiento(int);
@@ -31,7 +32,8 @@ public:
 	void setValorGPU(int);
 	int getTareas();
 	void setTareas(int);
-	int getOverhead();
-	void setOverhead(int);
+	double getOverhead();
+	void setOverhead(double);
+	double recalcularOverhead(int, int, int);
 };
 
