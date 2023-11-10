@@ -301,13 +301,96 @@ void modificarCPU() {
                 cin >> Tareas;                
                 valido4 = true;
             }
+
         }
+        cpus[selec - 1]->recalcularOverhead(Tareas, Core, RAM);
     } else {
         cout << "Ese valor no existe" << endl;        
     }
 }
 
 void batallaCPU() {
+    int selec1;
+    int selec2;
+    double eficiencia1=0.0;
+    double eficiencia2=0.0;
+    int Peso_cores = 3;
+    int Peso_ram = 2;
+    double Peso_almacenamientoSSD = 1.5;
+    int Peso_almacenamientoHDD = 1;
+    int Peso_gpu = 1; //(ya que la GPU tiene su propio valor incremental)
+    double Peso_tareas = 0.5; //(asumiendo que más tareas disminuyen la eficiencia)
+    int Peso_overhead = 2; //(un overhead significativo reduce mucho la eficiencia)
+
+    bool valido = true;
+    cout << "CPUs disponibles" << endl;
+    for (int i = 0; i < cpus.size(); i++) {
+        cout << i + 1 << ".  CPU " << i + 1 << endl;
+    }
+    cout << "CPU 1 seleccionado: ";
+    cin >> selec1;
+    cout << "CPU 2 seleccionado: ";
+    cin >> selec2;
+    while (valido) {
+        if (selec1 >=1 &&selec1<=cpus.size() && selec2 >= 1 && selec2 <= cpus.size()) {
+            valido = false;
+        }
+        else {
+            cout << "Valor no existe" << endl;
+            cout << "CPU 1 seleccionado: ";
+            cin >> selec1;
+            cout << "CPU 2 seleccionado: ";
+            cin >> selec2;
+            valido = true;
+        }
+    }
+    
+    cout << "Atributos de CPU 1: " << endl;
+    cout << "Cores: " << cpus[selec1-1]->getCores() << endl;
+    cout << "RAM: " << cpus[selec1 - 1]->getRam() << endl;
+    cout << "Tipo de Disco: " << cpus[selec1 - 1]->getTipoDisco() << endl;
+    cout << "Almacenamiento: " << cpus[selec1 - 1]->getAlmacenamiento() << endl;
+    cout << "GPU: " << cpus[selec1 - 1]->getGPU() << endl;
+    cout << "Valor GPU: " << cpus[selec1 - 1]->getValorGPU() << endl;
+    cout << "Tareas: " << cpus[selec1 - 1]->getTareas() << endl;
+    cout << "Overhead: " << cpus[selec1 - 1]->getOverhead() << endl;
+    cout << endl;
+
+    if (cpus[selec1 - 1]->getTipoDisco() == "SDD") {
+        eficiencia1 = (Peso_cores * cpus[selec1 - 1]->getCores()) + (Peso_ram * cpus[selec1 - 1]->getRam()) + (Peso_almacenamientoSSD * cpus[selec1 - 1]->getAlmacenamiento()) + (Peso_gpu * cpus[selec1 - 1]->getValorGPU()) - (Peso_tareas * cpus[selec1 - 1]->getTareas()) - (Peso_overhead * cpus[selec1 - 1]->getOverhead());
+    } else if (cpus[selec1 - 1]->getTipoDisco() == "HDD") {
+        eficiencia1 = (Peso_cores * cpus[selec1 - 1]->getCores()) + (Peso_ram * cpus[selec1 - 1]->getRam()) + (Peso_almacenamientoHDD * cpus[selec1 - 1]->getAlmacenamiento()) + (Peso_gpu * cpus[selec1 - 1]->getValorGPU()) - (Peso_tareas * cpus[selec1 - 1]->getTareas()) - (Peso_overhead * cpus[selec1 - 1]->getOverhead());
+    }
+    
+    cout << "Eficiencia de CPU 1: " << eficiencia1 << endl;
+
+    cout << "Atributos de CPU 2: " << endl;
+    cout << "Cores: " << cpus[selec2 - 1]->getCores() << endl;
+    cout << "RAM: " << cpus[selec2 - 1]->getRam() << endl;
+    cout << "Tipo de Disco: " << cpus[selec2 - 1]->getTipoDisco() << endl;
+    cout << "Almacenamiento: " << cpus[selec2 - 1]->getAlmacenamiento() << endl;
+    cout << "GPU: " << cpus[selec2 - 1]->getGPU() << endl;
+    cout << "Valor GPU: " << cpus[selec2 - 1]->getValorGPU() << endl;
+    cout << "Tareas: " << cpus[selec2 - 1]->getTareas() << endl;
+    cout << "Overhead: " << cpus[selec2 - 1]->getOverhead() << endl;
+    cout << endl;
+
+    if (cpus[selec2 - 1]->getTipoDisco() == "SDD") {
+        eficiencia2 = (Peso_cores * cpus[selec2 - 1]->getCores()) + (Peso_ram * cpus[selec2 - 1]->getRam()) + (Peso_almacenamientoSSD * cpus[selec2 - 1]->getAlmacenamiento()) + (Peso_gpu * cpus[selec2 - 1]->getValorGPU()) - (Peso_tareas * cpus[selec2 - 1]->getTareas()) - (Peso_overhead * cpus[selec2 - 1]->getOverhead());
+    }
+    else if (cpus[selec2 - 1]->getTipoDisco() == "HDD") {
+        eficiencia2 = (Peso_cores * cpus[selec2 - 1]->getCores()) + (Peso_ram * cpus[selec2 - 1]->getRam()) + (Peso_almacenamientoHDD * cpus[selec2 - 1]->getAlmacenamiento()) + (Peso_gpu * cpus[selec2 - 1]->getValorGPU()) - (Peso_tareas * cpus[selec2 - 1]->getTareas()) - (Peso_overhead * cpus[selec2 - 1]->getOverhead());
+    }
+    
+    cout << "Eficiencia de CPU 2: " << eficiencia2 << endl;
+
+    if (eficiencia1>eficiencia2) {
+        cout << "El ganador es CPU 1 con una eficiencia de " << eficiencia1 << endl;
+    }
+    else {
+        cout << "El ganador es CPU 2 con una eficiencia de " << eficiencia2 << endl;
+
+    }
 
 }
 
@@ -341,7 +424,13 @@ void ejercicio1() {
             break;
 
         case 3:
-            batallaCPU();
+            if (cpus.size()>=2) {
+                batallaCPU();
+            }
+            else {
+                cout << "Tiene que haber 2 CPUs para poder hacer batalla" << endl;
+                cout << endl;
+            }
             break;
 
         case 4:
