@@ -5,16 +5,17 @@
 using namespace std;
 
 class CPU {
-	int cores = 0;
-	int ram = 0;
-	string tipoDisco = "";
-	int almacenamiento = 0;
-	int gpu = 0;
-	int valorGpu = 0;
-	int tareas = 0;
-	double overhead = 0;
+	int cores;
+	int ram;
+	string tipoDisco;
+	int almacenamiento;
+	int gpu;
+	int valorGpu;
+	int tareas;
+	double overhead;
 public:
 	CPU(int, int, string, int, int, int);
+	CPU();
 	~CPU();
 	int getCores();
 	void setCores(int);

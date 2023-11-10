@@ -4,6 +4,8 @@
 #include <vector>
 using namespace std;
 
+static vector<CPU*> cpus;
+
 void menu() {
     cout << "Bienvenidos a mi examen 1 de Progra 3 :D" << endl;
     cout << "1. Batalla de CPU's" << endl;
@@ -12,8 +14,12 @@ void menu() {
     cout << "Ingrese una opción valida" << endl;
 }
 
+void adicionar(vector<CPU*> &cpus, CPU* cp) {
+    cpus.push_back(cp);
+}
+
 void armarCPU() {
-    vector<CPU*> cpus;
+
     int opcionGPU;
     int Core;
     bool valido = true;
@@ -25,7 +31,7 @@ void armarCPU() {
     int RAM;
     string TipoDisco;
     int Almacenamiento;
-    int GPU;
+    int GPU = 0;
     int Tareas;
     double Overhead;
 
@@ -42,7 +48,7 @@ void armarCPU() {
             valido1 = true;
         }
     }
-   
+
     cout << "Ingrese la cantidad de RAM en GB" << endl;
     cin >> RAM;
     while (valido2) {
@@ -61,7 +67,8 @@ void armarCPU() {
     while (valido) {
         if (TipoDisco == "SSD" || TipoDisco == "HDD") {
             valido = false;
-        } else {
+        }
+        else {
             cout << "Tiene que ser SSD o HDD" << endl;
             cout << "Ingrese el tipo de Disco (SSD o HDD)" << endl;
             cin >> TipoDisco;
@@ -83,9 +90,16 @@ void armarCPU() {
     }
     cout << "Ingrese el GPU del CPU" << endl;
     cout << "Las opciones son las siguientes:" << endl;
+    cout << "1. 3050" << endl;
+    cout << "1. 3060" << endl;
+    cout << "1. 3070" << endl;
+    cout << "1. 3090" << endl;
+    cout << "1. 4070" << endl;
+    cout << "1. 7090" << endl;
+    cout << "Ingrese una opcion" << endl;
     cin >> opcionGPU;
     switch (opcionGPU) {
-    
+
     case 1:
         GPU = 3050;
         break;
@@ -109,9 +123,9 @@ void armarCPU() {
     case 6:
         GPU = 7090;
         break;
-    
+
     default:
-        cout << "ERROR" << endl;
+        cout << "ERRORXD" << endl;
         break;
     }
 
@@ -128,8 +142,10 @@ void armarCPU() {
             valido4 = true;
         }
     }
-
-    cpus.push_back(CPU * (Core, RAM, TipoDisco, Almacenamiento, GPU, Tareas));
+    CPU* nuevoCPU = new CPU(Core, RAM, TipoDisco, Almacenamiento, GPU, Tareas);
+    cpus.push_back(nuevoCPU);
+    cout << cpus.size();
+    cout << cpus[0]->getAlmacenamiento();
 }
 
 void modificarCPU() {
@@ -154,17 +170,16 @@ void ejercicio1() {
         switch (opcionEjer1) {
         
         case 1:
-            cout << "En construcción" << endl;
+
             armarCPU();
             break;
 
         case 2:
-            cout << "En construcción" << endl;
+
             modificarCPU();
             break;
 
         case 3:
-            cout << "En construcción" << endl;
             batallaCPU();
             break;
 
@@ -193,12 +208,10 @@ int main() {
         switch (opcion) {
 
         case 1:
-            cout << "En construcción" << endl;
             ejercicio1();
             break;
 
         case 2:
-            cout << "En construcción" << endl;
             ejercicio2();
             break;
 

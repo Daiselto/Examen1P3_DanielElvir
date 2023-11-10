@@ -1,12 +1,12 @@
 #include "CPU.h"
 
 CPU::CPU(int Core, int RAM, string TipoDisco, int Alm, int GPU, int Tarea) {
-	Core = cores;
-	RAM = ram;
-	TipoDisco = tipoDisco;
-	Alm = almacenamiento;
-	GPU = gpu;
-	Tarea = tareas;
+	cores = Core;
+	ram = RAM;
+	tipoDisco=TipoDisco;
+	almacenamiento=Alm;
+	gpu = GPU;
+	tareas = Tarea;
 	switch (gpu) {
 	
 	case 1:
@@ -42,6 +42,9 @@ CPU::CPU(int Core, int RAM, string TipoDisco, int Alm, int GPU, int Tarea) {
 }
 
 CPU::~CPU() {
+}
+
+CPU::CPU() {
 }
 
 int CPU::getCores() {
