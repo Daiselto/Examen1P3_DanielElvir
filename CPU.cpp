@@ -121,3 +121,37 @@ void CPU::setOverhead(double OverHead) {
 double CPU::recalcularOverhead(int Tarea, int Core, int RAM) {
 	return overhead = (Tarea / Core) + (1 / RAM);
 }
+
+int CPU::cambiarValorGPU(int GPU) {
+	switch (GPU) {
+
+	case 3050:
+		return valorGpu = 1;
+		break;
+
+	case 3060:
+		return valorGpu = 2;
+		break;
+
+	case 3070:
+		return valorGpu = 3;
+		break;
+
+	case 3090:
+		return valorGpu = 4;
+		break;
+
+	case 4070:
+		return valorGpu = 5;
+		break;
+
+	case 7090:
+		return valorGpu = 6;
+		break;
+
+	default:
+		cout << "ERROR" << endl;
+		break;
+	}
+}
+

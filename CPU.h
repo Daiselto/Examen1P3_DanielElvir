@@ -35,5 +35,6 @@ public:
 	double getOverhead();
 	void setOverhead(double);
 	double recalcularOverhead(int, int, int);
+	int cambiarValorGPU(int);
 };
 

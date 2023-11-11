@@ -1,6 +1,7 @@
 #include <iostream>
 #include <locale>
 #include "CPU.h"
+#include "Bow.h"
 #include <vector>
 using namespace std;
 
@@ -14,9 +15,7 @@ void menu() {
     cout << "Ingrese una opción valida" << endl;
 }
 
-void adicionar(vector<CPU*> &cpus, CPU* cp) {
-    cpus.push_back(cp);
-}
+
 
 void armarCPU() {
 
@@ -98,6 +97,25 @@ void armarCPU() {
     cout << "6. 7090" << endl;
     cout << "Ingrese una opcion" << endl;
     cin >> opcionGPU;
+    while (valido5) {
+        if (opcionGPU>=1&&opcionGPU<=6) {
+            valido = false;
+        }
+        else {
+            cout << "No es parte de las opciones validas" << endl;
+            cout << "Ingrese el GPU del CPU" << endl;
+            cout << "Las opciones son las siguientes:" << endl;
+            cout << "1. 3050" << endl;
+            cout << "2. 3060" << endl;
+            cout << "3. 3070" << endl;
+            cout << "4. 3090" << endl;
+            cout << "5. 4070" << endl;
+            cout << "6. 7090" << endl;
+            cout << "Ingrese una opcion" << endl;
+            cin >> opcionGPU;
+            valido = true;
+        }
+    }
     switch (opcionGPU) {
 
     case 1:
@@ -249,6 +267,26 @@ void modificarCPU() {
         cout << "6. 7090" << endl;
         cout << "Ingrese una opcion" << endl;
         cin >> opcionGPU;
+
+        while (valido5) {
+            if (opcionGPU >= 1 && opcionGPU <= 6) {
+                valido = false;
+            }
+            else {
+                cout << "No es parte de las opciones validas" << endl;
+                cout << "Ingrese el GPU del CPU" << endl;
+                cout << "Las opciones son las siguientes:" << endl;
+                cout << "1. 3050" << endl;
+                cout << "2. 3060" << endl;
+                cout << "3. 3070" << endl;
+                cout << "4. 3090" << endl;
+                cout << "5. 4070" << endl;
+                cout << "6. 7090" << endl;
+                cout << "Ingrese una opcion" << endl;
+                cin >> opcionGPU;
+                valido = true;
+            }
+        }
         switch (opcionGPU) {
 
         case 1:
@@ -303,7 +341,10 @@ void modificarCPU() {
             }
 
         }
-        cpus[selec - 1]->recalcularOverhead(Tareas, Core, RAM);
+        double overhead = cpus[selec - 1]->recalcularOverhead(Tareas, Core, RAM);
+        cpus[selec - 1]->setOverhead(overhead);
+        int vGPU = cpus[selec - 1]->cambiarValorGPU(GPU);
+        cpus[selec - 1]->setValorGPU(vGPU);
     } else {
         cout << "Ese valor no existe" << endl;        
     }
@@ -445,6 +486,10 @@ void ejercicio1() {
 }
 
 void ejercicio2() {
+    int tamano;
+    //Bow arcouwu=new Bow();
+    cout << "Ingrese el tamaño del Bow que desea ingresar: ";
+    cin >> tamano;
 
 }
 

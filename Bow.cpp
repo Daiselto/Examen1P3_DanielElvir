@@ -1,8 +1,10 @@
 #include "Bow.h"
 
-Bow::Bow(int** arco, int filasYColumnas) {
-	Arco = arco;
+Bow::Bow(int filasYColumnas) {
 	fila_y_columna = filasYColumnas;
+}
+
+Bow::Bow() {
 }
 
 Bow::~Bow() {
@@ -21,8 +23,10 @@ int Bow::setFilaYColumna(int)
 	return 0;
 }
 
-void Bow::LlenarEIniciarMatriz(int FilayColumna) {
-	
+void Bow::LlenarEIniciarMatriz() {
+	int** matriz;
+	//matriz = new int[fila_y_columna];
+
 }
 
 void Bow::CrearBow() {

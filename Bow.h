@@ -1,15 +1,16 @@
 #pragma once
 class Bow {
-	int** Arco;
+	const int** Arco;
 	int fila_y_columna;
 public:
-	Bow(int**, int);
+	Bow(int);
+	Bow();
 	~Bow();
 	void getArco();
 	int** setArco(int**);
 	void getFilaYColumna();
 	int setFilaYColumna(int);
-	void LlenarEIniciarMatriz(int);
+	void LlenarEIniciarMatriz();
 	void CrearBow();
 	void MostrarBow();
 };
